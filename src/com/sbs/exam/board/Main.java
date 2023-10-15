@@ -110,7 +110,7 @@ public class Main {
             articlelastId = id;
             //System.out.println("생성된 게시물 객체 :" + article);
             lastArticle =new Article(id,title,body);
-
+            articles.add(lastArticle);
             System.out.printf("%d 번 게시물이 등록되었습니다.\n",id);
 
           }else {
