@@ -12,10 +12,17 @@ public class Main {
     System.out.printf("명령 ) ");
 
 
-    String cmd = sc.nextLine();
-    System.out.printf("입력된 명령어 = %S\n" ,cmd);
+    while(true)
+    {
 
-    System.out.println("== 프로그램 종료  ==");
+      String cmd = sc.nextLine();
+      System.out.printf("입력된 명령어 = %S\n" ,cmd);
+      if(cmd.equals("exit")) {
+        break;
+      }
+    }
+
+   System.out.println("== 프로그램 종료  ==");
     sc.close();
   }
 }
