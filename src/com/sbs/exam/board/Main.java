@@ -1,10 +1,11 @@
 package com.sbs.exam.board;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
   public static void main(String[] args) {
-    int articlelastId = 1;
+    int articlelastId = 0;
     Scanner sc = new Scanner(System.in);
 
     System.out.println("== 게시판 v 0.1.1 ==");
@@ -23,6 +24,17 @@ public class Main {
 
             break;
 
+         // }else if(cmd.equals("/usr/article/detail")){
+
+          //  System.out.println("== 게시물 번호입력 ==");
+          //  int num = sc.nextInt();
+          //  HashMap<Integer,String> article = new HashMap<Integer,String>();
+
+          //  System.out.println(article.get(num));
+
+
+
+
           }else if(cmd.equals("/usr/article/write")){
 
             System.out.println("== 게시물 등록 ==");
@@ -33,8 +45,18 @@ public class Main {
             System.out.printf("내용 : ");
             String body = sc.nextLine();
 
+            Article article=new Article();
 
-            System.out.printf("%d 번 게시물이 등록되었습니다.\n",articlelastId++);
+            int id = articlelastId +1;
+            article.id=id;
+            article.title=title;
+            article.body=body;
+            System.out.println("생성된 게시물 객체 :" + article);
+
+           //HashMap<Integer,Article> articles = new HashMap<Integer,Article>();
+           // articles.put(id,article);
+
+            System.out.printf("%d 번 게시물이 등록되었습니다.\n",article.id);
 
           }else {
             System.out.printf("입력된 명령어 = %S\n", cmd);
@@ -46,5 +68,35 @@ public class Main {
     sc.close();
     }
 
+
+  }
+
+  class Article{
+
+      int id;
+      String title;
+      String body;
+      Article(){
+
+      }
+
+
+      Article(int id,String title,String body)
+      {
+
+        this.id = id;
+        this.title = title;
+        this.body = body;
+
+
+
+      }
+
+    //  public String toString()
+    //  {
+
+    //    return title;
+
+    //  }
 
   }
