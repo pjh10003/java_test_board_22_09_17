@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
   public static void main(String[] args) {
-
+    int articlelastId = 1;
     Scanner sc = new Scanner(System.in);
 
     System.out.println("== 게시판 v 0.1.1 ==");
@@ -33,8 +33,8 @@ public class Main {
             System.out.printf("내용 : ");
             String body = sc.nextLine();
 
-            int id = 1;
-            System.out.printf("%d 번 게시물이 등록되었습니다.\n",id);
+
+            System.out.printf("%d 번 게시물이 등록되었습니다.\n",articlelastId++);
 
           }else {
             System.out.printf("입력된 명령어 = %S\n", cmd);
