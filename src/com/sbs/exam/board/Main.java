@@ -44,17 +44,13 @@ public class Main {
             System.out.printf("내용 : ");
             String body = sc.nextLine();
 
-            Article article=new Article();
 
             int id = articlelastId +1;
             articlelastId = id;
-            article.id=id;
-            article.title=title;
-            article.body=body;
-            System.out.println("생성된 게시물 객체 :" + article);
-            articles.put(id,article);
+            //System.out.println("생성된 게시물 객체 :" + article);
+            articles.put(id,new Article(id,title,body));
 
-            System.out.printf("%d 번 게시물이 등록되었습니다.\n",article.id);
+            System.out.printf("%d 번 게시물이 등록되었습니다.\n",id);
 
           }else {
             System.out.printf("입력된 명령어 = %s\n", cmd);
