@@ -1,14 +1,17 @@
 package com.sbs.exam.board;
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Main {
   public static void main(String[] args) {
     int articlelastId = 0;
     Scanner sc = new Scanner(System.in);
-    HashMap<Integer,Article> articles = new HashMap<Integer,Article>();
+   // ArrayList<Article>  articles = new ArrayList<Article>();
+    Article lastArticle = null;
     System.out.println("== 게시판 v 0.1.1 ==");
     System.out.println("== 프로그램 시작 ==");
 
@@ -27,9 +30,26 @@ public class Main {
 
           }else if(cmd.equals("/usr/article/detail")){
 
-            System.out.println("== 게시물 번호입력 ==");
-            int num = sc.nextInt();
-            System.out.println(articles.get(num));
+            // System.out.println("== 게시물 번호입력 ==");
+           // int num = sc.nextInt();
+
+            if(lastArticle == null) {
+
+              System.out.println("게시물이 존재하지 않습니다.");
+              continue;
+
+            }
+              Article article = lastArticle;
+              System.out.println("== 게시물 상세내용==");
+              System.out.printf("번호 : %s\n", article.id);
+              System.out.printf("제목 : %s\n", article.title);
+              System.out.printf("내용 : %s\n", article.body);
+
+
+
+
+
+            //System.out.println(articles.get(articlelastId-1));
 
 
 
@@ -48,7 +68,7 @@ public class Main {
             int id = articlelastId +1;
             articlelastId = id;
             //System.out.println("생성된 게시물 객체 :" + article);
-            articles.put(id,new Article(id,title,body));
+            lastArticle =new Article(id,title,body);
 
             System.out.printf("%d 번 게시물이 등록되었습니다.\n",id);
 
