@@ -16,14 +16,18 @@ public class Main {
 
 
   public static void main(String[] args) {
-    int articlelastId = 0;
+
     Scanner sc = new Scanner(System.in);
    // ArrayList<Article>  articles = new ArrayList<Article>();
     Article lastArticle = null;
+    int articlelastId = 0;
     List<Article> articles = new ArrayList<>();
 
 
     make_Test_data(articles);
+    if(articles.size() > 0 ) {
+      articlelastId = articles.get(articles.size()-1).id;
+    }
 
     System.out.println("== 게시판 v 0.1.1 ==");
     System.out.println("== 프로그램 시작 ==");
