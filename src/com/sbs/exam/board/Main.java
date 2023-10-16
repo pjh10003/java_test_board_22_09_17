@@ -64,15 +64,41 @@ public class Main {
           }else if(rq.getUrlPath().equals("/usr/article/list")){
 
 
+
+
             System.out.println("== 게시물 리스트==");
             System.out.println("-------------------");
             System.out.println("번호 / 제목");
             System.out.println("-------------------");
 
 
-            for(int i = articles.size()-1  ;i >= 0;i--){
-              Article article = articles.get(i);
-              System.out.printf("%d /%s\n",article.id,article.title);
+
+
+            boolean orderByIdDesc = true;
+            if(params.containsKey("orderBy") && params.get("orderBy").equals("idAsc"))
+            {
+             // Collections.reverse(articles);
+              orderByIdDesc = false;
+            }
+
+            //usr/article/list?orderBy=idDesc
+            //usr/article/list?orderBy=idAsc
+
+
+            if(orderByIdDesc) {
+              for (int i = articles.size() - 1; i >= 0; i--) {
+                Article article = articles.get(i);
+                System.out.printf("%d /%s\n", article.id, article.title);
+
+              }
+            }else{
+
+              for( Article article  : articles)
+              {
+                System.out.printf("%d /%s\n", article.id, article.title);
+              }
+
+
 
             }
 
