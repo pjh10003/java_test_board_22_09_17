@@ -74,20 +74,43 @@ public class Main {
             System.out.println("번호 / 제목");
             System.out.println("-------------------");
 
+            // 검색시작
+
+            List<Article> filterdArticles =new ArrayList<>();
+            List<Article> sortedArticles = articles;
+            String searchKeywrod = null;
+
+
+            if(params.containsKey("searchKeyword")) {
+
+              searchKeywrod = params.get("searchKeyword");
+
+
+              for (Article article : articles) {
+                if (article.body.contains(searchKeywrod) || article.title.contains(searchKeywrod)) {
+                  filterdArticles.add(article);
+                }
+                sortedArticles = filterdArticles;
+              }
+            }
+
+
+            System.out.println(sortedArticles);
 
 
 
             boolean orderByIdDesc = true;
 
-            List<Article> sortedArticles = articles;
 
-            System.out.println(articles);
+
 
             if(params.containsKey("orderBy") && params.get("orderBy").equals("idAsc"))
             {
              // Collections.reverse(articles);
               orderByIdDesc = false;
             }
+
+
 
 
             if(orderByIdDesc) {
