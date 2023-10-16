@@ -1,7 +1,10 @@
 package com.sbs.exam.board;
 
-import java.util.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
 
@@ -14,7 +17,6 @@ public class Main {
     }
 
   }
-
 
   public static void main(String[] args) {
 
@@ -75,7 +77,7 @@ public class Main {
       } else if (rq.getUrlPath().equals("/usr/article/write")) {
 
         actionUsrArticleWrite(sc);
-        articlelastId++;
+
 
       } else {
         System.out.printf("입력된 명령어 = %s\n", cmd);
@@ -216,7 +218,6 @@ public class Main {
     System.out.printf("내용 : ");
     String body = sc.nextLine();
 
-    Map<String, String> params = rq.getParams();
 
     int id = ++articlelastId;
     articlelastId = id;
@@ -320,108 +321,6 @@ public class Main {
 
 }
 
-class Article {
-
-  int id;
-  String title;
-  String body;
-
-  Article() {
-
-  }
 
 
-  Article(int id, String title, String body) {
 
-    this.id = id;
-    this.title = title;
-    this.body = body;
-
-
-  }
-
-
-  @Override
-  public String toString() {
-
-    return String.format("id : %d,title:\"%s\",body:\"%s\"", this.id, this.title, this.body);
-
-  }
-
-}
-
-
-class Rq {
-
-  String url;
-  Map<String, String> params = null;
-  String urlPath;
-
-  Rq(String url) {
-    this.url = url;
-    params = Util.getParamsFromUrl(url);
-    urlPath = Util.getPathFromUrl(url);
-  }
-
-  public Map<String, String> getParams() {
-
-    return params;
-  }
-
-  public String getUrlPath() {
-
-
-    return urlPath;
-
-  }
-}
-
-
-class Util {
-
-
-  public static Map<String, String> getParamsFromUrl(String url) {
-    Map<String, String> params = new HashMap<>();
-    String[] urlBits = url.split("\\?", 2);
-
-    if (urlBits.length == 1) {
-      return params;
-    }
-
-    for (String bit : urlBits[1].split("&", 2)) {
-
-      String[] bitBits = bit.split("=", 2);
-
-      if (bitBits.length == 1) {
-        continue;
-      }
-
-      params.put(bitBits[0], bitBits[1]);
-
-
-    }
-    return params;
-  }
-
-  public static String getPathFromUrl(String url) {
-
-    String[] urlPath = url.split("\\?", 2);
-    return urlPath[0];
-  }
-
-  public static <T> List<T> reverseList(List<T> list) {
-    List<T> reverse = new ArrayList<>(list.size());
-
-    for (int i = list.size() - 1; i >= 0; i--) {
-
-
-      reverse.add(list.get(i));
-
-
-    }
-
-    return reverse;
-
-
-  }
-}
