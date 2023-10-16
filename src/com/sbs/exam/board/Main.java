@@ -82,14 +82,29 @@ public class Main {
 
             // System.out.println("== 게시물 번호입력 ==");
            // int num = sc.nextInt();
-            int id = Integer.parseInt(params.get("id"));
+            int id =0;
+            try {
 
+               id = Integer.parseInt(params.get("id"));
 
+            }catch(NumberFormatException e){
+
+              System.out.println("id를 정수 형태로 입력하세요!");
+              continue;
+
+            }
+
+            if(params.containsKey("id")==false) {
+
+              System.out.println("id를 입력해주세요");
+            }
 
             if(id > articles.size()) {
               System.out.println("게시물이 존재하지 않습니다.");
               continue;
             }
+
+
 
             //Article article = articles.get(articles.size() - 1);
             Article article = articles.get(id -1);
