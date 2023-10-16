@@ -27,6 +27,7 @@ public class Main {
     List<Article> articles = new ArrayList<>();
 
 
+
     make_Test_data(articles);
     if(articles.size() > 0 ) {
       articlelastId = articles.get(articles.size()-1).id;
@@ -75,32 +76,28 @@ public class Main {
 
 
             boolean orderByIdDesc = true;
+
+            List<Article> sortedArticles = articles;
+
+            System.out.println(articles);
+
             if(params.containsKey("orderBy") && params.get("orderBy").equals("idAsc"))
             {
              // Collections.reverse(articles);
               orderByIdDesc = false;
             }
 
-            //usr/article/list?orderBy=idDesc
-            //usr/article/list?orderBy=idAsc
-
 
             if(orderByIdDesc) {
-              for (int i = articles.size() - 1; i >= 0; i--) {
-                Article article = articles.get(i);
-                System.out.printf("%d /%s\n", article.id, article.title);
 
-              }
-            }else{
-
-              for( Article article  : articles)
-              {
-                System.out.printf("%d /%s\n", article.id, article.title);
-              }
-
-
-
+              sortedArticles= Util.reverseList(sortedArticles);
             }
+
+            for( Article article  : sortedArticles)
+            {
+              System.out.printf("%d /%s\n", article.id, article.title);
+            }
+
 
             System.out.println("-------------------");
 
@@ -139,9 +136,6 @@ public class Main {
             System.out.printf("번호 : %s\n", article.id);
             System.out.printf("제목 : %s\n", article.title);
             System.out.printf("내용 : %s\n", article.body);
-
-
-
 
 
             //System.out.println(articles.get(articlelastId-1));
@@ -279,5 +273,23 @@ class Util{
 
     String[] urlPath =url.split("\\?",2);
     return urlPath[0];
+  }
+
+  public static <T> List<T> reverseList(List<T> list)
+  {
+    List<T> reverse  = new ArrayList<>(list.size());
+
+    for(int i = list.size()-1; i >= 0;i--)
+    {
+
+
+      reverse.add(list.get(i));
+
+
+    }
+
+    return reverse;
+
+
   }
 }
