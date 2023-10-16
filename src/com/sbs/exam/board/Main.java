@@ -1,5 +1,4 @@
 package com.sbs.exam.board;
-import java.sql.SQLOutput;
 import java.util.*;
 
 
@@ -51,80 +50,17 @@ public class Main {
       System.out.printf("명령 ) ");
       String cmd = sc.nextLine();
 
-
-
-
       Rq rq = new Rq(cmd);
       Map<String,String> params = rq.getParams();
-
-
 
           if(rq.getUrlPath().equals("exit")) {
 
             break;
 
-
           }else if(rq.getUrlPath().equals("/usr/article/list")){
 
 
-
-
-            System.out.println("== 게시물 리스트==");
-            System.out.println("-------------------");
-            System.out.println("번호 / 제목");
-            System.out.println("-------------------");
-
-            // 검색시작
-
-            List<Article> filterdArticles =new ArrayList<>();
-            List<Article> sortedArticles = articles;
-            String searchKeywrod = null;
-
-
-            if(params.containsKey("searchKeyword")) {
-
-              searchKeywrod = params.get("searchKeyword");
-
-
-              for (Article article : articles) {
-                if (article.body.contains(searchKeywrod) || article.title.contains(searchKeywrod)) {
-                  filterdArticles.add(article);
-                }
-                sortedArticles = filterdArticles;
-              }
-            }
-
-
-            System.out.println(sortedArticles);
-
-
-
-            boolean orderByIdDesc = true;
-
-
-
-
-            if(params.containsKey("orderBy") && params.get("orderBy").equals("idAsc"))
-            {
-             // Collections.reverse(articles);
-              orderByIdDesc = false;
-            }
-
-
-
-
-            if(orderByIdDesc) {
-
-              sortedArticles= Util.reverseList(sortedArticles);
-            }
-
-            for( Article article  : sortedArticles)
-            {
-              System.out.printf("%d /%s\n", article.id, article.title);
-            }
-
-
-            System.out.println("-------------------");
+            actionUsrArtileList(rq,articles);
 
           }else if(rq.getUrlPath().equals("/usr/article/detail")){
 
@@ -203,6 +139,66 @@ public class Main {
     sc.close();
     }
 
+  private static void actionUsrArtileList(Rq rq, List<Article> articles) {
+
+          System.out.println("== 게시물 리스트==");
+          System.out.println("-------------------");
+          System.out.println("번호 / 제목");
+          System.out.println("-------------------");
+
+          // 검색시작
+
+          List<Article> filterdArticles =new ArrayList<>();
+          List<Article> sortedArticles = articles;
+          String searchKeywrod = null;
+
+
+          Map<String,String> params = rq.getParams();
+          if(params.containsKey("searchKeyword")) {
+
+            searchKeywrod = params.get("searchKeyword");
+
+            for (Article article : articles) {
+              if (article.body.contains(searchKeywrod) || article.title.contains(searchKeywrod)) {
+                filterdArticles.add(article);
+              }
+              sortedArticles = filterdArticles;
+            }
+
+          }
+
+
+
+
+          boolean orderByIdDesc = true;
+
+
+
+
+          if(params.containsKey("orderBy") && params.get("orderBy").equals("idAsc"))
+          {
+            // Collections.reverse(articles);
+            orderByIdDesc = false;
+          }
+
+
+
+
+          if(orderByIdDesc) {
+
+            sortedArticles= Util.reverseList(sortedArticles);
+          }
+
+          for( Article article  : sortedArticles)
+          {
+            System.out.printf("%d /%s\n", article.id, article.title);
+          }
+
+
+          System.out.println("-------------------");
+
+
+  }
 
 
 
