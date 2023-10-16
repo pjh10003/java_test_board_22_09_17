@@ -119,7 +119,7 @@ public class UsrMemberController {
     }
 
 
-
+    rq.setSessionAttr("loginedMember",member);
 
     System.out.printf("%s 님 환영합니다\n",loginId);
 
@@ -140,5 +140,12 @@ public class UsrMemberController {
 
 
 
+  }
+
+  public void actionLogOut(Rq rq) {
+
+      rq.removeSessionAttr("loginedMember");
+
+    System.out.println("로그아웃 되었습니다");
   }
 }

@@ -50,5 +50,19 @@ public class Rq {
     return urlPath;
 
   }
+
+  public void setSessionAttr(String key, Object value) {
+
+    Session session = Container.getSession();
+    session.setAttribute(key,value);
+  }
+
+
+  public void removeSessionAttr(String key) {
+    Session session = Container.getSession();
+
+    session.removeAttribute(key);
+
+  }
 }
 

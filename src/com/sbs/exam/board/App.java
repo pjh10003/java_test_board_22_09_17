@@ -10,6 +10,7 @@ public class App {
 
     // ArrayList<Article>  articles = new ArrayList<Article>();
     Article lastArticle = null;
+    Session session = Container.getSession();
 
 
 
@@ -21,7 +22,16 @@ public class App {
 
 
     while (true) {
-      System.out.printf("명령 ) ");
+
+      Member logindMember = (Member)session.getAttribute("loginedMember");
+
+      String promptName="명령어";
+      if(logindMember !=null)
+      {
+        promptName = logindMember.loginId;
+      }
+      System.out.printf("%s )",promptName);
+
       String cmd = Container.sc.nextLine();
 
       Rq rq = new Rq(cmd);
@@ -67,6 +77,11 @@ public class App {
       } else if (rq.getUrlPath().equals("/usr/member/login")) {
 
         Container.usrMemberController.actionLogin(rq);
+
+
+      } else if (rq.getUrlPath().equals("/usr/member/logout")) {
+
+        Container.usrMemberController.actionLogOut(rq);
 
 
       } else {
