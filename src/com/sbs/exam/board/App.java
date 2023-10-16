@@ -59,6 +59,11 @@ public class App {
         Container.usrArticleController.actionWrite();
 
 
+      } else if (rq.getUrlPath().equals("/usr/member/join")) {
+
+        Container.usrMemberController.actionJoin(rq);
+
+
       } else {
         System.out.printf("입력된 명령어 = %s\n", cmd);
       }
