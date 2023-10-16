@@ -5,13 +5,13 @@ import java.util.*;
 
 public class Main {
 
-  static void make_Test_data(List<Article> articles) {
-
+  static int articlelastId =0;
+  static List<Article> articles = new ArrayList<>();
+  static void make_Test_data() {
 
     for (int i = 1; i < 101; i++) {
       articles.add(new Article(i, "제목" + i, "내용" + i));
     }
-
 
   }
 
@@ -21,11 +21,11 @@ public class Main {
     Scanner sc = new Scanner(System.in);
     // ArrayList<Article>  articles = new ArrayList<Article>();
     Article lastArticle = null;
-    int articlelastId = 0;
-    List<Article> articles = new ArrayList<>();
 
 
-    make_Test_data(articles);
+
+
+    make_Test_data();
     if (articles.size() > 0) {
       articlelastId = articles.get(articles.size() - 1).id;
 
@@ -52,29 +52,29 @@ public class Main {
       } else if (rq.getUrlPath().equals("/usr/article/list")) {
 
 
-        actionUsrArticleList(rq, articles);
+        actionUsrArticleList(rq);
 
       } else if (rq.getUrlPath().equals("/usr/article/detail")) {
 
 
-        actionUsrArticleDetail(rq, articles);
+        actionUsrArticleDetail(rq);
 
 
       } else if (rq.getUrlPath().equals("/usr/article/modify")) {
 
 
-        actionUsrArticleModify(rq, articles, sc);
+        actionUsrArticleModify(rq, sc);
 
 
       } else if (rq.getUrlPath().equals("/usr/article/delete")) {
 
 
-        actionUsrArticleDelete(rq, articles);
+        actionUsrArticleDelete(rq);
 
 
       } else if (rq.getUrlPath().equals("/usr/article/write")) {
 
-        actionUsrArticleWrite(rq, sc, articlelastId, articles, lastArticle);
+        actionUsrArticleWrite(sc);
         articlelastId++;
 
       } else {
@@ -87,7 +87,7 @@ public class Main {
     sc.close();
   }
 
-  private static void actionUsrArticleDelete(Rq rq, List<Article> articles) {
+  private static void actionUsrArticleDelete(Rq rq) {
 
 
     int id = 0;
@@ -147,7 +147,7 @@ public class Main {
     System.out.printf("%d 번 게시물을 삭제 하였습니다", id);
   }
 
-  private static void actionUsrArticleModify(Rq rq, List<Article> articles, Scanner sc) {
+  private static void actionUsrArticleModify(Rq rq, Scanner sc) {
 
 
     int id = 0;
@@ -206,7 +206,7 @@ public class Main {
   }
 
 
-  private static void actionUsrArticleWrite(Rq rq, Scanner sc, int articlelastId, List<Article> articles, Article lastArticle) {
+  private static void actionUsrArticleWrite(Scanner sc) {
 
     System.out.println("== 게시물 등록 ==");
 
@@ -222,13 +222,13 @@ public class Main {
     articlelastId = id;
     Article article = new Article(id, title, body);
     //System.out.println("생성된 게시물 객체 :" + article);
-    lastArticle = article;
+
     articles.add(article);
     System.out.printf("%d 번 게시물이 등록되었습니다.\n", id);
   }
 
 
-  private static void actionUsrArticleDetail(Rq rq, List<Article> articles) {
+  private static void actionUsrArticleDetail(Rq rq) {
 
 
     int id = 0;
@@ -264,7 +264,7 @@ public class Main {
 
   }
 
-  private static void actionUsrArticleList(Rq rq, List<Article> articles) {
+  private static void actionUsrArticleList(Rq rq) {
 
     System.out.println("== 게시물 리스트==");
     System.out.println("-------------------");
