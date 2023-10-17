@@ -25,6 +25,9 @@ public class App {
 
       Member logindMember = (Member)session.getAttribute("loginedMember");
 
+
+
+
       String promptName="명령어";
       if(logindMember !=null)
       {

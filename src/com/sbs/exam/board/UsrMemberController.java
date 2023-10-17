@@ -4,6 +4,8 @@ package com.sbs.exam.board;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class UsrMemberController {
 
    private int memberlastId;
@@ -144,8 +146,24 @@ public class UsrMemberController {
 
   public void actionLogOut(Rq rq) {
 
-      rq.removeSessionAttr("loginedMember");
 
-    System.out.println("로그아웃 되었습니다");
+    Member logindMember = (Member)Container.session.getAttribute("loginedMember");
+
+
+
+    if(logindMember != null) {
+      rq.removeSessionAttr("loginedMember");
+      System.out.println("로그아웃 되었습니다");
+      return;
+    }else{
+
+      System.out.println("로그인후 이용해주세요");
+      return;
+
+
+    }
+
+
+
   }
 }
